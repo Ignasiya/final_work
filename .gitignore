@@ -1,4 +1,4 @@
-#IDEA
+# IDEA
 .gradle
 .idea/
 !.idea/icon*.png
