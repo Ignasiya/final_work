@@ -244,14 +244,102 @@ VALUES
 ````
    - Удалить записи о верблюдах и объединить таблицы лошадей и ослов.
 ````SQL
+DELETE FROM camels;
 
+CREATE TABLE horses_and_donkeys 
+SELECT * FROM horses
+	UNION 
+SELECT * FROM donkeys;
 ````
    - Создать новую таблицу для животных в возрасте от 1 до 3 лет и вычислить их возраст с точностью до месяца.
 ````SQL
+DROP TABLE IF EXISTS temp_animals;
+CREATE TEMPORARY TABLE temp_animals AS
+SELECT * FROM cats
+UNION
+SELECT * FROM dogs
+UNION
+SELECT * FROM hamsters
+UNION
+SELECT * FROM horses
+UNION
+SELECT * FROM donkeys
+UNION
+SELECT * FROM camels;
 
+DROP TABLE IF EXISTS young_animals;
+CREATE TABLE young_animals
+SELECT
+	name, type_id, birthday, commands, TIMESTAMPDIFF(MONTH, birthday, CURDATE()) AS age_in_month
+FROM 
+	temp_animals
+WHERE birthday BETWEEN ADDDATE(CURDATE(), INTERVAL -3 YEAR) AND ADDDATE(CURDATE(), INTERVAL -1 YEAR);
 ````
    - Объединить все созданные таблицы в одну, сохраняя информацию о принадлежности к исходным таблицам.
+````SQL
+DROP TABLE IF EXISTS all_animals;
+CREATE TABLE all_animals
 
+SELECT 
+	dg.name,
+	p.subclass_name, 
+	dg.birthday, 
+	dg.commands,
+	a.class_name
+FROM dogs dg
+LEFT JOIN pets p ON p.id = dg.type_id
+LEFT JOIN animals a ON a.id = p.class_id
+UNION
+SELECT 
+	ct.name,
+	p.subclass_name, 
+	ct.birthday, 
+	ct.commands,
+	a.class_name
+FROM cats ct
+LEFT JOIN pets p ON p.id = ct.type_id
+LEFT JOIN animals a ON a.id = p.class_id
+UNION
+SELECT 
+	hm.name,
+	p.subclass_name, 
+	hm.birthday, 
+	hm.commands,
+	a.class_name
+FROM hamsters hm
+LEFT JOIN pets p ON p.id = hm.type_id
+LEFT JOIN animals a ON a.id = p.class_id
+UNION
+SELECT 
+	hr.name,
+	pa.subclass_name, 
+	hr.birthday, 
+	hr.commands,
+	a.class_name
+FROM horses hr
+LEFT JOIN pack_animals pa ON pa.id = hr.type_id
+LEFT JOIN animals a ON a.id = pa.class_id
+UNION
+SELECT 
+	dk.name,
+	pa.subclass_name, 
+	dk.birthday, 
+	dk.commands,
+	a.class_name
+FROM donkeys dk
+LEFT JOIN pack_animals pa ON pa.id = dk.type_id
+LEFT JOIN animals a ON a.id = pa.class_id
+UNION
+SELECT 
+	cm.name,
+	pa.subclass_name, 
+	cm.birthday, 
+	cm.commands,
+	a.class_name
+FROM camels cm
+LEFT JOIN pack_animals pa ON pa.id = cm.type_id
+LEFT JOIN animals a ON a.id = pa.class_id
+````
 8. ООП и Java
    - Создать иерархию классов в Java, который будет повторять диаграмму классов созданную в задаче 6(Диаграмма классов) .
 
