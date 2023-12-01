@@ -13,20 +13,13 @@ public class View implements BasicView {
 
 
     public View() {
-        Mode start = new Lottery();
-        Mode setting = new Settings(this);
+        Mode add = new Add();
         Mode exit = new Exit();
         Map<String, Mode> menu = new LinkedHashMap<>();
-        menu.put(start.getNameMenu(), start);
-        menu.put(setting.getNameMenu(), setting);
+        menu.put(add.getNameMenu(), add);
         menu.put(exit.getNameMenu(), exit);
-        this.control = new Control(new ToysDistributor(), menu);
+        this.control = new Control(menu);
         start(control, "\nПриветствуем в Магазине игрушек");
-    }
-
-    public View(BasicControl control, String text) {
-        this.control = control;
-        start(control, text);
     }
 
     @Override

@@ -7,11 +7,10 @@ import java.util.Scanner;
 
 public class Control implements BasicControl {
     private final Map<String, Mode> modes;
-    private final ToysDistributor toys;
 
-    public Control(ToysDistributor toys, Map<String, Mode> modes) {
+
+    public Control(Map<String, Mode> modes) {
         this.modes = modes;
-        this.toys = toys;
     }
 
     /**
@@ -37,7 +36,7 @@ public class Control implements BasicControl {
     @Override
     public void onExecute(String item, Scanner in) {
         try {
-            modes.get(item).execute(toys, in);
+            modes.get(item).execute(in);
         } catch (RuntimeException e) {
             System.out.println("err: введено неверно значение");
         }
