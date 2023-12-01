@@ -9,8 +9,8 @@ public class Add extends Mode {
     }
 
     @Override
-    public void execute(ToysDistributor toys, Scanner scanner) {
-        toys.addToy(getToy(toys, scanner, 1));
+    public void execute(Scanner scanner) {
+
         System.out.println("-> добавлено успешно");
     }
 }

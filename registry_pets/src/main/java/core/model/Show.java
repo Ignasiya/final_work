@@ -9,8 +9,7 @@ public class Show extends Mode{
     }
 
     @Override
-    public void execute(ToysDistributor toys, Scanner scanner) {
-        if (toys.getToys() != null) System.out.println(toys);
-        else System.out.println("err: база пуста");
+    public void execute(Scanner scanner) {
+
     }
 }

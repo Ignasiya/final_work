@@ -9,7 +9,7 @@ public class Exit extends Mode {
     }
 
     @Override
-    public void execute(ToysDistributor toys, Scanner scanner) {
+    public void execute(Scanner scanner) {
         System.out.println("-> выход...");
         System.exit(0);
     }
