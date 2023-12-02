@@ -1,9 +1,9 @@
 package core.data;
 
-import java.util.List;
+import java.sql.Date;
 
 public class Horse extends PackAnimal {
-    public Horse(int id, String name, String birthday, List<String> commands) {
-        super(id, name, birthday, commands);
+    public Horse(String name, Date birthday, String commands) {
+        super(name, birthday, commands);
     }
 }
