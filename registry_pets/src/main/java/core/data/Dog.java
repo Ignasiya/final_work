@@ -1,9 +1,9 @@
 package core.data;
 
-import java.util.List;
+import java.sql.Date;
 
 public class Dog extends Pet {
-    public Dog(int id, String name, String birthday, List<String> commands) {
-        super(id, name, birthday, commands);
+    public Dog(String name, Date birthday, String commands) {
+        super(name, birthday, commands);
     }
 }

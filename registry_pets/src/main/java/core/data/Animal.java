@@ -1,30 +1,26 @@
 package core.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.sql.Date;
 import java.util.List;
 
 public abstract class Animal {
-    protected int id;
     protected String name;
-    protected String birthday;
+    protected Date birthday;
     protected List<String> commands;
 
-    public Animal(int id, String name, String birthday, List<String> commands) {
-        this.id = id;
+    public Animal(String name, Date birthday, String commands) {
         this.name = name;
         this.birthday = birthday;
-        this.commands = commands;
-    }
-
-    public int getId() {
-        return id;
+        this.commands = Arrays.asList(commands.split("\\s*,\\s*"));
     }
 
     public String getName() {
         return name;
     }
 
-
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -32,13 +28,19 @@ public abstract class Animal {
         return commands;
     }
 
+    public void setCommands(List<String> commands) {
+        List<String> temp = new ArrayList<>(this.commands);
+        temp.addAll(commands);
+        this.commands = temp;
+    }
+
     @Override
     public String toString() {
-        return String.format("%d. " +
+        return String.format(
+                "\n%s - " +
                 "имя: %s, " +
-                "%s, " +
                 "дата рождения: %s, " +
-                "комманды: %s", id, name, getClass().getSimpleName(), birthday, commands.toString());
+                "комманды: %s", getClass().getSimpleName(), name, birthday, commands.toString());
     }
 }
 

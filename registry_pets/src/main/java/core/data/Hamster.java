@@ -1,9 +1,9 @@
 package core.data;
 
-import java.util.List;
+import java.sql.Date;
 
 public class Hamster extends Pet {
-    public Hamster(int id, String name, String birthday, List<String> commands) {
-        super(id, name, birthday, commands);
+    public Hamster(String name, Date birthday, String commands) {
+        super(name, birthday, commands);
     }
 }
